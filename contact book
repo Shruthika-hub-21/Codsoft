@@ -1,0 +1,72 @@
+contacts = {}
+
+def add_contact():
+    name = input("Enter contact name: ")
+    phone = input("Enter contact phone number: ")
+    email = input("Enter contact email: ")
+    address = input("Enter contact address: ")
+    contacts[name] = {"phone": phone, "email": email, "address": address}
+    print("Contact added successfully!")
+
+def view_contact_list():
+    print("Contact List:")
+    for name, contact in contacts.items():
+        print(f"Name: {name}, Phone: {contact['phone']}")
+
+def search_contact(search_term):
+    search_results = [name for name in contacts.keys() if search_term in name or search_term in contacts[name]['phone']]
+    if search_results:
+        print("Search Results:")
+        for result in search_results:
+            print(f"Name: {result}, Phone: {contacts[result]['phone']}")
+    else:
+        print("No matching contacts found.")
+
+def update_contact():
+    name = input("Enter the name of the contact you want to update: ")
+    if name in contacts:
+        phone = input("Enter new phone number: ")
+        email = input("Enter new email: ")
+        address = input("Enter new address: ")
+        contacts[name] = {"phone": phone, "email": email, "address": address}
+        print("Contact updated successfully!")
+    else:
+        print("Contact not found.")
+
+def delete_contact():
+    name = input("Enter the name of the contact you want to delete: ")
+    if name in contacts:
+        del contacts[name]
+        print("Contact deleted successfully!")
+    else:
+        print("Contact not found.")
+
+def display_menu():
+    print("Contact Management System")
+    print("1. Add Contact")
+    print("2. View Contact List")
+    print("3. Search Contact")
+    print("4. Update Contact")
+    print("5. Delete Contact")
+    print("6. Exit")
+
+while True:
+    display_menu()
+    choice = input("Enter your choice: ")
+
+    if choice == '1':
+        add_contact()
+    elif choice == '2':
+        view_contact_list()
+    elif choice == '3':
+        search_term = input("Enter name or phone number to search: ")
+        search_contact(search_term)
+    elif choice == '4':
+        update_contact()
+    elif choice == '5':
+        delete_contact()
+    elif choice == '6':
+        print("Exiting Contact Management System. Goodbye!")
+        break
+    else:
+        print("Invalid choice. Please try again.")
